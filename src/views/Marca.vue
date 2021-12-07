@@ -1,18 +1,18 @@
 <template>
   <div>
     <form @submit.prevent="cadastrar">
-      <h2>Frases Motivacionais</h2>
+      <h2>Marcas</h2>
       <div class="form-group">
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo"
+        <label for="nome">Nome</label>
+        <input type="text" id="nome"
             class="form-control" required autofocus
-            v-model="titulo">
+            v-model="nome">
       </div>
       <div class="form-group">
-        <label for="frase">Frase</label>
-        <textarea id="frase"
+        <label for="marca">Marca</label>
+        <textarea id="marca"
             class="form-control" required
-            v-model="frase">
+            v-model="marca">
         </textarea>
       </div>
       <button class="btn btn-lg btn-primary btn-block" 
@@ -23,17 +23,15 @@
       <thead>
         <tr>
           <th>Id</th>
-          <th>Título</th>
-          <th>Frase</th>
-          <th>Data/hora</th>
+          <th>nome</th>
+          <th>Produtos</th>          
         </tr>
       </thead>
       <tbody>
-        <tr v-for="frase in frases" :key="frase.id">
-          <td>{{ frase.id }}</td>
-          <td>{{ frase.titulo }}</td>
-          <td>{{ frase.conteudo }}</td>
-          <td>{{ frase.dataHora }}</td>
+        <tr v-for="marca in marcas" :key="marca.id">
+          <td>{{ marca.id }}</td>
+          <td>{{ marca.nome }}</td>
+          <td>{{ Produto.nome }}</td>         
         </tr>
       </tbody>
     </table>
@@ -47,9 +45,9 @@ export default {
   name: 'anotacoes',
   data() {
     return {
-      titulo: '',
-      frase: '',
-      frases: []
+      nome: '',
+      marca: '',
+      marcas: []
     }
   },
   computed: {
@@ -59,26 +57,25 @@ export default {
   },
   methods: {
     cadastrar() {
-      axios.post('frase/nova',
+      axios.post('marca',
           {
-            titulo: this.titulo,
-            conteudo: this.frase,
-            usuario: this.usuario
+            nome: this.nome,
+            produto: this.produto
           })
         .then(res => {
           console.log(res);
-          this.titulo = '';
-          this.frase = '';
+          this.nome = '';
+          this.marca = '';
           this.atualizar();
         })
         .catch(error => console.log(error))
     },
     atualizar () {
-      axios.get('/frase/busca/' + this.usuario, 
+      axios.get('/marca'+ this.usuario, 
           { headers: { Accept: 'application/json' } })
         .then(res => {
           console.log(res)
-          this.frases = res.data
+          this.marcas = res.data
         })
         .catch(error => console.log(error))
     }
