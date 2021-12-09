@@ -7,6 +7,7 @@
         <input type="text" id="nome"
             class="form-control" required autofocus
             v-model="nome">
+            <button @click="listarMarcas">Listar Marcas</button>
       </div>
       <div class="form-group">
         <label for="marca">Marca</label>
@@ -82,6 +83,10 @@ export default {
   },
   created () {
     this.atualizar()
+  },
+  listarMarcas(){
+    this.$router.push('/marca')
   }
+
 }
 </script>
