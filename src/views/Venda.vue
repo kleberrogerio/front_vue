@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="cadastrar">
-      <h2>Frases Motivacionais</h2>
+      <h2>Vendas</h2>
       <div class="form-group">
         <label for="titulo">Título</label>
         <input type="text" id="titulo"
