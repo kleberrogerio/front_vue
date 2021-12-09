@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="cadastrar">
+    <form @submit.prevent="atualizar">
       <h2>Marcas</h2>    
         <button @click="listarMarcas">Listar Marcas</button>
     </form>
