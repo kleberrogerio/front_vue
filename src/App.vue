@@ -44,6 +44,7 @@
 
         <tbody>
 
+<<<<<<< HEAD
           <tr v-for="produto of produtos" :key="produto.id">
 
             <td>{{ produto.nome }}</td>
@@ -52,6 +53,16 @@
             <td>
               <button @click="editar(produto)" class="waves-effect btn-small blue darken-1"><i class="material-icons">create</i></button>
               <button @click="remover(produto)" class="waves-effect btn-small red darken-1"><i class="material-icons">delete_sweep</i></button>
+=======
+          <tr>
+
+            <td>Arduino</td>
+            <td>100</td>
+            <td>50.00</td>
+            <td>
+              <button class="waves-effect btn-small blue darken-1"><i class="material-icons">create</i></button>
+              <button class="waves-effect btn-small red darken-1"><i class="material-icons">delete_sweep</i></button>
+>>>>>>> 28e69871b7cc5d1f69ca1c51c0f725ebee370df1
             </td>
 
           </tr>
@@ -66,6 +77,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import Produto from './services/produtos'
 export default {
   name: 'app',
@@ -134,3 +146,14 @@ export default {
 
 <style>
 </style>
+=======
+import Produto from './services/marca'
+export default{
+  mounted(){
+Produto.listar().then(resposta=>{
+  console.log(resposta)
+})
+  }
+}
+</script>
+>>>>>>> 28e69871b7cc5d1f69ca1c51c0f725ebee370df1
