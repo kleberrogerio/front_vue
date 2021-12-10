@@ -77,7 +77,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import Produto from './services/produtos'
 export default {
   name: 'app',
@@ -146,14 +145,3 @@ export default {
 
 <style>
 </style>
-=======
-import Produto from './services/marca'
-export default{
-  mounted(){
-Produto.listar().then(resposta=>{
-  console.log(resposta)
-})
-  }
-}
-</script>
->>>>>>> 28e69871b7cc5d1f69ca1c51c0f725ebee370df1
