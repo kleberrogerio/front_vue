@@ -8,8 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: null,
-    usuario: null,
-    permiteNavegacao: true
+    usuario: null
   },
   mutations: {
     setUsuario(state, usuario) {
@@ -21,11 +20,7 @@ export default new Vuex.Store({
     logout(state) {
       state.token = null;
       state.usuario = null;
-    },
-    alteraPermiteNavegacao(state){
-      state.permiteNavegacao=!state.permiteNavegacao
     }
-
   },
   actions: {
     login(context, { usuario, senha }) {

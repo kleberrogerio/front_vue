@@ -1,23 +1,27 @@
 <template>
   <div>
-    <form @submit.prevent="atualizar">
-      <h2>Marcas</h2>    
-        <button @click="listarMarcas">Listar Marcas</button>
+    <form @submit.prevent="cadastrar">
+      <h2>Marca</h2>
+      <div class="form-group">
+        <label for="marca">Marca</label>
+        <input type="text" id="marca"
+            class="form-control" required autofocus
+            v-model="marca">
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
     </form>
     <br>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Id</th>
-          <th>nome</th>
-          <th>Produtos</th>          
+          <th>Marca</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="marca in marcas" :key="marca.id">
-          <td>{{ marca.id }}</td>
-          <td>{{ marca.nome }}</td>
-          <td>{{ marca.produto.nome }}</td>         
+        <tr v-for="mar in marcas" :key="mar.id">
+          <td>{{ mar.id }}</td>
+          <td>{{ mar.nome }}</td>
         </tr>
       </tbody>
     </table>
@@ -27,12 +31,12 @@
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
+
 export default {
-  name: 'loja',
+  name: 'marcas',
   data() {
     return {
-      nome: '',
-      marca: '',
+      marca: null,
       marcas: []
     }
   },
@@ -41,9 +45,21 @@ export default {
       'usuario'
     ])
   },
-  methods: {    
+  methods: {
+    cadastrar() {
+      axios.post('/marca',
+          {
+            nome: this.marca,
+          })
+        .then(res => {
+          console.log(res);
+          this.marca = '';
+          this.atualizar();
+        })
+        .catch(error => console.log(error))
+    },
     atualizar () {
-      axios.get('/marca'+ this.usuario, 
+      axios.get('/marca', 
           { headers: { Accept: 'application/json' } })
         .then(res => {
           console.log(res)
@@ -54,10 +70,6 @@ export default {
   },
   created () {
     this.atualizar()
-  },
-  listarMarcas(){
-    this.$router.push('/marca')
   }
-
 }
 </script>

@@ -1,39 +1,44 @@
 <template>
   <div>
     <form @submit.prevent="cadastrar">
-      <h2>Produtos</h2>
+      <h2>Produto</h2>
       <div class="form-group">
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo"
+        <label for="produto">Produto</label>
+        <input type="text" id="produto"
             class="form-control" required autofocus
-            v-model="titulo">
+            v-model="produto.nome">
       </div>
       <div class="form-group">
-        <label for="frase">Frase</label>
-        <textarea id="frase"
-            class="form-control" required
-            v-model="frase">
-        </textarea>
+        <label for="preco">Preço</label>
+        <input type="text" id="preco"
+            class="form-control" required autofocus
+            v-model="produto.preco">
       </div>
-      <button class="btn btn-lg btn-primary btn-block" 
-        type="submit">Salvar</button>
+      <div class="form-group">
+        <label for="texto">Marca</label>
+        <select v-model="produto.marca.id" class="form-control" id="texto" aria-label="Default select example">
+            <option selected disabled></option>
+            <option v-for="marca in marcas" :value="marca.id" :key="marca.id">{{marca.nome}}</option>
+        </select>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
     </form>
     <br>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Id</th>
-          <th>Título</th>
-          <th>Frase</th>
-          <th>Data/hora</th>
+          <th>Nome</th>
+          <th>Preço</th>
+          <th>Marca</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="frase in frases" :key="frase.id">
-          <td>{{ frase.id }}</td>
-          <td>{{ frase.titulo }}</td>
-          <td>{{ frase.conteudo }}</td>
-          <td>{{ frase.dataHora }}</td>
+        <tr v-for="pro in produtos" :key="pro.id">
+          <td>{{ pro.id }}</td>
+          <td>{{ pro.nome }}</td>
+          <td>{{ pro.preco }}</td>
+          <td>{{ pro.marca.nome }}</td>
         </tr>
       </tbody>
     </table>
@@ -43,13 +48,21 @@
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
+
 export default {
-  name: 'anotacoes',
+  name: 'produtos',
   data() {
     return {
-      titulo: '',
-      frase: '',
-      frases: []
+        produto:
+        {
+        nome: null,
+        marca: {
+            id: null
+        },
+        preco: null
+        },
+      produtos: [],
+      marcas:[]
     }
   },
   computed: {
@@ -59,26 +72,35 @@ export default {
   },
   methods: {
     cadastrar() {
-      axios.post('frase/nova',
-          {
-            titulo: this.titulo,
-            conteudo: this.frase,
-            usuario: this.usuario
-          })
+      axios.post('/produto',
+         this.produto)
         .then(res => {
           console.log(res);
-          this.titulo = '';
-          this.frase = '';
+          this.produto=
+            {
+            nome: null,
+            marca: {
+                id: null
+            },
+            preco: null
+            }
           this.atualizar();
         })
         .catch(error => console.log(error))
     },
     atualizar () {
-      axios.get('/frase/busca/' + this.usuario, 
+        axios.get('/marca', 
           { headers: { Accept: 'application/json' } })
         .then(res => {
           console.log(res)
-          this.frases = res.data
+          this.marcas = res.data
+        })
+        .catch(error => console.log(error))
+      axios.get('/produto', 
+          { headers: { Accept: 'application/json' } })
+        .then(res => {
+          console.log(res)
+          this.produtos = res.data
         })
         .catch(error => console.log(error))
     }

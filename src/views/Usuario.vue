@@ -1,39 +1,43 @@
 <template>
   <div>
     <form @submit.prevent="cadastrar">
-      <h2>Usuários</h2>
+      <h2>Usuário</h2>
       <div class="form-group">
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo"
+        <label for="usuario">Nome</label>
+        <input type="text" id="usuario"
             class="form-control" required autofocus
-            v-model="titulo">
+            v-model="usuario.nome">
       </div>
       <div class="form-group">
-        <label for="frase">Frase</label>
-        <textarea id="frase"
-            class="form-control" required
-            v-model="frase">
-        </textarea>
+        <label for="email">E-mail</label>
+        <input type="text" id="email"
+            class="form-control" required autofocus
+            v-model="usuario.email">
       </div>
-      <button class="btn btn-lg btn-primary btn-block" 
-        type="submit">Salvar</button>
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha"
+            class="form-control" required autofocus
+            v-model="usuario.senha">
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
     </form>
     <br>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Id</th>
-          <th>Título</th>
-          <th>Frase</th>
-          <th>Data/hora</th>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Autorização</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="frase in frases" :key="frase.id">
-          <td>{{ frase.id }}</td>
-          <td>{{ frase.titulo }}</td>
-          <td>{{ frase.conteudo }}</td>
-          <td>{{ frase.dataHora }}</td>
+        <tr v-for="usr in usuario" :key="usr.id">
+          <td>{{ usr.id }}</td>
+          <td>{{ usr.nome }}</td>
+          <td>{{ usr.email }}</td>
+          <td>{{ usr.usuario.auth }}</td>
         </tr>
       </tbody>
     </table>
@@ -43,13 +47,21 @@
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
+
 export default {
-  name: 'anotacoes',
+  name: 'produtos',
   data() {
     return {
-      titulo: '',
-      frase: '',
-      frases: []
+        produto:
+        {
+        nome: null,
+        marca: {
+            id: null
+        },
+        preco: null
+        },
+      produtos: [],
+      marcas:[]
     }
   },
   computed: {
@@ -59,26 +71,33 @@ export default {
   },
   methods: {
     cadastrar() {
-      axios.post('frase/nova',
-          {
-            titulo: this.titulo,
-            conteudo: this.frase,
-            usuario: this.usuario
-          })
+      axios.post('/login',
+         this.usuario)
         .then(res => {
           console.log(res);
-          this.titulo = '';
-          this.frase = '';
+          this.usuario=
+            {
+            nome: null,
+            email: null,
+            senha: null
+            }
           this.atualizar();
         })
         .catch(error => console.log(error))
     },
     atualizar () {
-      axios.get('/frase/busca/' + this.usuario, 
+        axios.get('/login', 
           { headers: { Accept: 'application/json' } })
         .then(res => {
           console.log(res)
-          this.frases = res.data
+          this.usuario = res.data
+        })
+        .catch(error => console.log(error))
+      axios.get('/login', 
+          { headers: { Accept: 'application/json' } })
+        .then(res => {
+          console.log(res)
+          this.usuario = res.data
         })
         .catch(error => console.log(error))
     }
