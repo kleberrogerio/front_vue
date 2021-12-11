@@ -69,7 +69,7 @@ export default {
   methods: {
     cadastrar() {
       axios.post('/usuario',
-         this.usuario)
+         this.produto)
         .then(res => {
           console.log(res);
           this.usuario=
