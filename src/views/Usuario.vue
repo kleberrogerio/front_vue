@@ -72,7 +72,7 @@ export default {
          this.produto)
         .then(res => {
           console.log(res);
-          this.usuario=
+          this.usu=
             {
             nome: null,
             email: null,
