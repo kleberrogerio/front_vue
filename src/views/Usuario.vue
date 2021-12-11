@@ -3,22 +3,22 @@
     <form @submit.prevent="cadastrar">
       <h2>Usuário</h2>
       <div class="form-group">
-        <label for="nome">Nome</label>
+        <label for="usu">Nome</label>
         <input type="text" id="nome"
             class="form-control" required autofocus
-            v-model="usuario.nome">
+            v-model="usu.nome">
       </div>
       <div class="form-group">
         <label for="email">E-mail</label>
         <input type="text" id="email"
             class="form-control" required autofocus
-            v-model="usuario.email">
+            v-model="usu.email">
       </div>
       <div class="form-group">
         <label for="senha">Senha</label>
         <input type="password" id="senha"
             class="form-control" required autofocus
-            v-model="usuario.senha">
+            v-model="usu.senha">
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
     </form>
@@ -52,7 +52,7 @@ export default {
   name: 'usuarios',
   data() {
     return {
-        usuario:
+        usu:
         {
         nome: null,
         email: null,
