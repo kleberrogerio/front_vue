@@ -4,7 +4,7 @@
       <h2>Usuário</h2>
       <div class="form-group">
         <label for="usuario">Nome</label>
-        <input type="text" id="usuario"
+        <input type="text" id="nome"
             class="form-control" required autofocus
             v-model="usuario.nome">
       </div>
@@ -29,15 +29,15 @@
           <th>Id</th>
           <th>Nome</th>
           <th>E-mail</th>
-          <th>Autorização</th>
+          <th>Senha</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="usr in usuario" :key="usr.id">
           <td>{{ usr.id }}</td>
           <td>{{ usr.nome }}</td>
-          <td>{{ usr.email }}</td>
-          <td>{{ usr.usuario.auth }}</td>
+          <td>{{ usr.email }}</td>     
+          <td>{{ usr.senha }}</td>      
         </tr>
       </tbody>
     </table>
@@ -49,19 +49,16 @@ import axios from 'axios'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'produtos',
+  name: 'usuarios',
   data() {
     return {
-        produto:
+        usuario:
         {
         nome: null,
-        marca: {
-            id: null
+        email: null,
+        senha: null        
         },
-        preco: null
-        },
-      produtos: [],
-      marcas:[]
+      usuarios: []      
     }
   },
   computed: {
@@ -71,7 +68,7 @@ export default {
   },
   methods: {
     cadastrar() {
-      axios.post('/login',
+      axios.post('/usuario',
          this.usuario)
         .then(res => {
           console.log(res);
@@ -86,14 +83,7 @@ export default {
         .catch(error => console.log(error))
     },
     atualizar () {
-        axios.get('/login', 
-          { headers: { Accept: 'application/json' } })
-        .then(res => {
-          console.log(res)
-          this.usuario = res.data
-        })
-        .catch(error => console.log(error))
-      axios.get('/login', 
+        axios.get('/usuario', 
           { headers: { Accept: 'application/json' } })
         .then(res => {
           console.log(res)
