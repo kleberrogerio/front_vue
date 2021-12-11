@@ -3,7 +3,7 @@
     <form @submit.prevent="cadastrar">
       <h2>Usuário</h2>
       <div class="form-group">
-        <label for="usuario">Nome</label>
+        <label for="nome">Nome</label>
         <input type="text" id="nome"
             class="form-control" required autofocus
             v-model="usuario.nome">
@@ -33,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="usr in usuario" :key="usr.id">
+        <tr v-for="usr in usuarios" :key="usr.id">
           <td>{{ usr.id }}</td>
           <td>{{ usr.nome }}</td>
           <td>{{ usr.email }}</td>     
@@ -87,7 +87,7 @@ export default {
           { headers: { Accept: 'application/json' } })
         .then(res => {
           console.log(res)
-          this.usuario = res.data
+          this.usuarios = res.data
         })
         .catch(error => console.log(error))
     }
