@@ -28,16 +28,14 @@
         <tr>
           <th>Id</th>
           <th>Nome</th>
-          <th>E-mail</th>
-          <th>Senha</th>
+          <th>E-mail</th>         
         </tr>
       </thead>
       <tbody>
         <tr v-for="usr in usuarios" :key="usr.id">
           <td>{{ usr.id }}</td>
           <td>{{ usr.nome }}</td>
-          <td>{{ usr.email }}</td>     
-          <td>{{ usr.senha }}</td>      
+          <td>{{ usr.email }}</td>              
         </tr>
       </tbody>
     </table>
