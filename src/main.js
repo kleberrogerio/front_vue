@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://8080-amber-unicorn-927d30z9.ws-us23.gitpod.io/spring-loja'
+axios.defaults.baseURL = 'https://8080-fuchsia-cicada-nzkt5iam.ws-us23.gitpod.io/spring-loja'
                         
 axios.interceptors.request.use(config => {
   console.log(store)

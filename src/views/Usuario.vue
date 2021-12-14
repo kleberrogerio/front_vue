@@ -3,22 +3,22 @@
     <form @submit.prevent="cadastrar">
       <h2>Usuário</h2>
       <div class="form-group">
-        <label for="usu">Nome</label>
+        <label for="usuario">Nome</label>
         <input type="text" id="nome"
             class="form-control" required autofocus
-            v-model="usu.nome">
+            v-model="usuario.nome">
       </div>
       <div class="form-group">
         <label for="email">E-mail</label>
         <input type="text" id="email"
             class="form-control" required autofocus
-            v-model="usu.email">
+            v-model="usuario.email">
       </div>
       <div class="form-group">
         <label for="senha">Senha</label>
         <input type="password" id="senha"
             class="form-control" required autofocus
-            v-model="usu.senha">
+            v-model="usuario.senha">
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
     </form>
@@ -69,10 +69,10 @@ export default {
   methods: {
     cadastrar() {
       axios.post('/usuario',
-         this.produto)
+         this.usuario)
         .then(res => {
           console.log(res);
-          this.usu=
+          this.usuario=
             {
             nome: null,
             email: null,
