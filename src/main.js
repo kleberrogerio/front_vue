@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://8080-fuchsia-cicada-nzkt5iam.ws-us23.gitpod.io/spring-loja'
+axios.defaults.baseURL = 'https://8080-bronze-lemming-hyl2tivz.ws-us23.gitpod.io/spring-loja'
                         
 axios.interceptors.request.use(config => {
   console.log(store)
@@ -20,6 +20,7 @@ axios.interceptors.response.use(res => {
       alert('Não autorizado!')
     }
     else if (error.response.status === 401) {
+      alert('Usuario/E-mail já cadastrado! Faça o login novamente e utilize um Usuario/E-mail válido!!')
       store.commit('logout')
       router.push('/login')
     }
