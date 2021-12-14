@@ -52,7 +52,7 @@ export default {
   name: 'usuarios',
   data() {
     return {
-        usu:
+        usuario:
         {
         nome: null,
         email: null,
